@@ -16,6 +16,7 @@ Use the Python version 3.7.6 and install the libraries in the requirements.txt f
 Download the dataset from https://www.kaggle.com/datasets/amanneo/diabetic-retinopathy-resized-arranged.
 
 Unzip the compressed file. You should get the following project structure:
+``` bash 
     .
     ├── data.ipynb
     ├── archive       
@@ -29,7 +30,7 @@ Unzip the compressed file. You should get the following project structure:
     │   ├── engine.py
     │   ├── visualizations.py
     └── ...
-
+```
 ├── app/
 │   ├── controllers/
 │   ├── models/
