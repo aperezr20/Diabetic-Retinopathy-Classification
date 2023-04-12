@@ -30,6 +30,26 @@ Unzip the compressed file. You should get the following project structure:
     │   ├── visualizations.py
     └── ...
 
+├── app/
+│   ├── controllers/
+│   ├── models/
+│   ├── views/
+│   └── app.py
+├── config/
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── tests/
+│   ├── functional/
+│   └── unit/
+├── requirements.txt
+├── README.md
+├── LICENSE
+└── .gitignore
+
+
+
+
 ## Project Motivation<a name="motivation"></a>
 
 The motivation behind this project is to apply data engineering to analyze disaster data from Appen and build a predicting model for a web app that can classify disaster messages. The goal is to create a machine learning pipeline that categorizes these messages, allowing emergency workers to send them to the appropriate disaster relief agency quickly.
