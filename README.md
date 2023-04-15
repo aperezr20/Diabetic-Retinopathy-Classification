@@ -13,7 +13,7 @@ Multi-Class Classification of retina images using deep learning
 
 Use the Python version 3.7.6 and install the libraries in the requirements.txt file of this repo
 
-1. Download the dataset from https://www.kaggle.com/datasets/amanneo/diabetic-retinopathy-resized-arranged. Then, unzip the compressed file.
+1. Download the dataset from [this link](https://www.kaggle.com/datasets/amanneo/diabetic-retinopathy-resized-arranged). Then, unzip the compressed file.
 
 2. Download the trained model from: [link]
 
