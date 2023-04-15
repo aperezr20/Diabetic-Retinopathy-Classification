@@ -15,14 +15,14 @@ Use the Python version 3.7.6 and install the libraries in the requirements.txt f
 
 1. Download the dataset from [this link](https://www.kaggle.com/datasets/amanneo/diabetic-retinopathy-resized-arranged). Then, unzip the compressed file.
 
-2. Download the trained model from: [link]
+2. Download the trained model from: [link](https://drive.google.com/file/d/1BCtLviqhYIt2782qGrnZv67v7smMQv7z/view?usp=sharing)
 
 Your project structure should be like this:
 
 ``` bash 
     .
     ├── data.ipynb
-    ├── retinopathy-model.pt
+    ├── retinopathy-model-adam-ce.pt
     ├── archive       
     │   ├── 0 
     │   │   └── *.jpeg        
@@ -51,9 +51,19 @@ This repo is organized this way:
 
 ### Model Performance Metrics 
 
+``` bash
+|                    | **precision** | **recall** | **f1-score** |
+|-------------------:|--------------:|-----------:|-------------:|
+|                  0 |        0.7676 |     0.9504 |       0.8493 |
+|                  1 |        0.0000 |     0.0000 |       0.0000 |
+|                  2 |        0.3211 |     0.1076 |       0.1612 |
+|                  3 |        0.1036 |     0.1657 |       0.1275 |
+|                  4 |        0.0000 |     0.0000 |       0.0000 |
+|       **accuracy** |        0.7185 |     0.7185 |       0.7185 |
+|      **macro avg** |        0.2385 |     0.2448 |       0.2276 |
+| **weighted   avg** |        0.6149 |     0.7185 |       0.6514 |
 
-### Qualitative Results
-
+```
 
 
 ## Instructions <a name="instructions"></a>
