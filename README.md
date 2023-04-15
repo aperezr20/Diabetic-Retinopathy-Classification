@@ -51,7 +51,7 @@ This repo is organized this way:
 
 ### Model Performance Metrics 
 
-``` bash
+``` bash 
 |                    | **precision** | **recall** | **f1-score** |
 |-------------------:|--------------:|-----------:|-------------:|
 |                  0 |        0.7676 |     0.9504 |       0.8493 |
@@ -62,8 +62,8 @@ This repo is organized this way:
 |       **accuracy** |        0.7185 |     0.7185 |       0.7185 |
 |      **macro avg** |        0.2385 |     0.2448 |       0.2276 |
 | **weighted   avg** |        0.6149 |     0.7185 |       0.6514 |
-
 ```
+
 
 
 ## Instructions <a name="instructions"></a>
