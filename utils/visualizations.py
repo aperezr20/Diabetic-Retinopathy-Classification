@@ -3,7 +3,7 @@ import seaborn as sns
 import numpy as np
 import torchvision.transforms as transforms
 import torchvision.transforms.functional as F
-from sklearn.metrics import precision_recall_curve
+from sklearn.metrics import precision_recall_curve, confusion_matrix, ConfusionMatrixDisplay
 
 
 def normalize_image(image):
@@ -171,6 +171,7 @@ def plot_confusion_matrix(labels, pred_labels, classes):
     plt.xlabel('Predicted Label')
     plt.ylabel('True Label')
 
+
 def plot_precision_recall_curve(labels, pred_labels, classes):
     """
     Plots the precision-recall curve for each class and the average curve.
@@ -209,16 +210,6 @@ def plot_precision_recall_curve(labels, pred_labels, classes):
     }
     for i in range(num_classes):
         sns.lineplot(x=recall[i], y=precision[i], label=classes_names[str(i)])
-
-    # calculate average precision and recall
-    avg_precision = np.zeros_like(precision[0])
-    avg_recall = np.linspace(0, 1, 101)
-    for i in range(num_classes):
-        avg_precision += np.interp(avg_recall, recall[i], precision[i])
-    avg_precision /= num_classes
-
-    # plot average precision-recall curve
-    sns.lineplot(x=avg_recall, y=avg_precision, label="Average")
 
     # set plot labels and title
     plt.xlabel("Recall")
