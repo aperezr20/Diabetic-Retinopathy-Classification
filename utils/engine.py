@@ -1,4 +1,5 @@
 import torch
+import torch.nn.functional as F
 
 def calculate_topk_accuracy(y_pred: torch.Tensor, y: torch.Tensor, k: int = 5) -> tuple:
     """Calculate top-k accuracy.
@@ -164,7 +165,7 @@ def get_predictions(model, iterator, device):
             x = x.to(device)
 
             # Get predictions from model
-            y_pred, _ = model(x)
+            y_pred = model(x)
 
             # Apply softmax function to predictions
             y_prob = F.softmax(y_pred, dim=-1)
