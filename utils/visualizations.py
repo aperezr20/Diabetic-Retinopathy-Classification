@@ -3,6 +3,8 @@ import seaborn as sns
 import numpy as np
 import torchvision.transforms as transforms
 import torchvision.transforms.functional as F
+from sklearn.metrics import precision_recall_curve
+
 
 def normalize_image(image):
     """Normalize the given image by clamping it between its minimum and maximum values and scaling it."""
@@ -68,7 +70,7 @@ def plot_class_distribution(dataset, class_names):
         '4':'Proliferative DR'
     }
 
-    class_names = [classes_names[i] for i in class_names]
+    class_names = [classes_names[str(i)] for i in class_names]
 
     class_counts = [0] * len(class_names)
     for _, label in dataset:
@@ -79,6 +81,13 @@ def plot_class_distribution(dataset, class_names):
     ax.set_xlabel('Class')
     ax.set_ylabel('Number of Images')
     ax.set_title('Class Distribution of Dataset')
+
+    # Add percentage text above each bar
+    total_samples = sum(class_counts)
+    for i, count in enumerate(class_counts):
+        percentage = count / total_samples * 100
+        ax.text(i, count + 5, f'{percentage:.2f}%', ha='center')
+
     plt.show()
 
 
@@ -140,7 +149,82 @@ def plot_transformations(sample_image, pretrained_size, pretrained_means, pretra
     plt.show()
 
 
+def plot_confusion_matrix(labels, pred_labels, classes):
+    
+    classes_names = {
+        '0':'No DR',
+        '1':'Mild',
+        '2':'Moderate',
+        '3':'Severe',
+        '4':'Proliferative DR'
+    }
 
+    axis_labels = [classes_names[i] for i in classes]
 
+    fig = plt.figure(figsize = (10, 10))
+    ax = fig.add_subplot(1, 1, 1)
+    cm = confusion_matrix(labels, pred_labels)
+    cm = ConfusionMatrixDisplay(cm, display_labels = axis_labels)
+    cm.plot( cmap = 'Blues', ax = ax)
+    fig.delaxes(fig.axes[1]) #delete colorbar
+    plt.xticks(rotation = 90)
+    plt.xlabel('Predicted Label')
+    plt.ylabel('True Label')
 
+def plot_precision_recall_curve(labels, pred_labels, classes):
+    """
+    Plots the precision-recall curve for each class and the average curve.
+
+    Args:
+    labels (array-like): The ground truth labels.
+    pred_labels (array-like): The predicted labels.
+    classes (list): A list of class names.
+
+    Returns:
+    None
+    """
+    num_classes = len(classes)
+
+    # convert labels and predictions to one-hot encoding
+    onehot_labels = np.zeros((len(labels), num_classes))
+    onehot_labels[np.arange(len(labels)), labels] = 1
+    onehot_preds = np.zeros((len(pred_labels), num_classes))
+    onehot_preds[np.arange(len(pred_labels)), pred_labels] = 1
+
+    # calculate precision and recall for each class
+    precision = dict()
+    recall = dict()
+    for i in range(num_classes):
+        p, r, _ = precision_recall_curve(onehot_labels[:, i], onehot_preds[:, i])
+        precision[i] = p
+        recall[i] = r
+
+    # plot precision-recall curves for each class
+    classes_names = {
+        '0':'No DR',
+        '1':'Mild',
+        '2':'Moderate',
+        '3':'Severe',
+        '4':'Proliferative DR'
+    }
+    for i in range(num_classes):
+        sns.lineplot(x=recall[i], y=precision[i], label=classes_names[str(i)])
+
+    # calculate average precision and recall
+    avg_precision = np.zeros_like(precision[0])
+    avg_recall = np.linspace(0, 1, 101)
+    for i in range(num_classes):
+        avg_precision += np.interp(avg_recall, recall[i], precision[i])
+    avg_precision /= num_classes
+
+    # plot average precision-recall curve
+    sns.lineplot(x=avg_recall, y=avg_precision, label="Average")
+
+    # set plot labels and title
+    plt.xlabel("Recall")
+    plt.ylabel("Precision")
+    plt.title("Precision-Recall Curve")
+
+    # show plot
+    plt.show()
 
