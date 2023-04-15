@@ -1,5 +1,6 @@
 # Diabetic-Retinopathy-Classification
 Multi-Class Classification of retina images using deep learning
+Take a look to my Medium Post about this project [here](https://medium.com/@aleperez119/using-a-resnet50-model-to-classify-retinopathy-images-e95968ab69f0)!
 
 ### Table of Contents
 1. [Installation](#installation)
